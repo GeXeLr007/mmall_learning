@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
@@ -18,10 +19,11 @@ public class PropertiesUtil {
     private static Properties props;
 
     static {
-        String fileName = "src/main/profiles/beta/mmall.properties";
+        String fileName = "mmall.properties";
         props = new Properties();
         try {
-            props.load(new InputStreamReader(PropertiesUtil.class.getClassLoader().getResourceAsStream(fileName),"UTF-8"));
+            InputStream resourceAsStream = PropertiesUtil.class.getClassLoader().getResourceAsStream(fileName);
+            props.load(new InputStreamReader(resourceAsStream,"UTF-8"));
         } catch (IOException e) {
             logger.error("配置文件读取异常",e);
         }
